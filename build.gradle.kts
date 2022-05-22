@@ -19,10 +19,13 @@ repositories {
 dependencies {
     implementation(compose.desktop.currentOs)
     implementation("com.squareup.retrofit2:retrofit:2.9.0")
-    implementation ("com.squareup.okhttp3:okhttp:5.0.0-alpha.3")
-    implementation ("com.squareup.retrofit2:converter-gson:2.9.0")
+    implementation("com.squareup.okhttp3:okhttp:5.0.0-alpha.3")
+    implementation("com.squareup.retrofit2:converter-gson:2.9.0")
     implementation("android.arch.lifecycle:viewmodel:1.1.1")
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.6.1-native-mt")
+    implementation("com.artemzin.assert-parcelable:assert-parcelable:1.0.1")
+    implementation("io.taig.android:parcelable_2.11:2.4.1")
+    implementation("dev.icerock.moko:parcelize:0.8.0")
 
 }
 
