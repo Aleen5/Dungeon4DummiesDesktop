@@ -79,18 +79,20 @@ class UsersViewModel {
         }
     }
 
-    suspend fun postUser(user: UsersModel) {
-        val apiServices = ApiServices.getInstance()
-        try {
-            val userP = apiServices.postUser(user)
-            if (userP.isSuccessful) {
-                usersModel = userP.body()!!
-            } else {
+    fun postUser(user: UsersModel) {
+        GlobalScope.launch {
+            val apiServices = ApiServices.getInstance()
+            try {
+                val userP = apiServices.postUser(user)
+                if (userP.isSuccessful) {
+                    usersModel = userP.body()!!
+                } else {
+                    // LOG
+                }
+            } catch (e: Exception) {
+                errorMessage = e.message.toString()
                 // LOG
             }
-        } catch (e: Exception) {
-            errorMessage = e.message.toString()
-            // LOG
         }
     }
 }

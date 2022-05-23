@@ -19,7 +19,8 @@ import viewModels.UsersViewModel
 
 @Composable
 fun LoginScreen(
-    onLoginClick: () -> Unit
+    onLoginClick: () -> Unit,
+    onRegisterClick: () -> Unit
 ) {
     val usersViewModel = UsersViewModel()
     val showDialogLoading = remember {
@@ -33,7 +34,9 @@ fun LoginScreen(
         mutableStateOf("1234")
     }
     
-    Scaffold() {
+    Scaffold(
+        modifier = Modifier.background(Color.Black)
+    ) {
         Column(
             modifier = Modifier.fillMaxSize().background(color = Color.Black),
             verticalArrangement = Arrangement.Center,
@@ -74,7 +77,20 @@ fun LoginScreen(
                              Text(text = "Log in")
                          }
                          Spacer(modifier = Modifier.width(40.dp))
+
                          // BOTON REGISTER
+
+                         Button(
+                             modifier = Modifier
+                                 .width(100.dp)
+                                 .padding(vertical = 15.dp),
+                             onClick = {
+                                onRegisterClick()
+                             },
+                             colors = ButtonDefaults.buttonColors(backgroundColor = SECONDARYCOLOR)
+                         ) {
+                             Text(text = "Register")
+                         }
                      }
                  }
              }
@@ -84,16 +100,6 @@ fun LoginScreen(
 
 @Composable
 fun NavRegisterButton() {
-    Button(
-        modifier = Modifier
-            .width(100.dp)
-            .padding(vertical = 15.dp),
-        onClick = {
 
-        },
-        colors = ButtonDefaults.buttonColors(backgroundColor = SECONDARYCOLOR)
-    ) {
-        Text(text = "Register")
-    }
 }
 
