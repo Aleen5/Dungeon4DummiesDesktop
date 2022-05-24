@@ -6,6 +6,7 @@ import retrofit2.Response
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import retrofit2.http.*
+import models.Auth
 
 interface ApiServices {
 
@@ -17,8 +18,10 @@ interface ApiServices {
     @GET("users/{username}")
     suspend fun getUser(@Path("username")username: String) : Response<UsersModel>
 
-    @GET("users/{username}/{password}")
-    suspend fun getLogin(@Path("username")username: String, @Path("password") password: String) : Response<UsersModel>
+    @POST("users/login")
+    suspend fun getLogin(
+        @Body extra : Auth
+    ) : Response<UsersModel>
 
     @PUT("users/{username}")
     suspend fun updateUser(

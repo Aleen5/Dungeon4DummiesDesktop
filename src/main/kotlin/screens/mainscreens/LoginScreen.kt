@@ -11,6 +11,7 @@ import androidx.compose.ui.unit.dp
 import com.example.dungeon4dummiesmobile.screens.shared.*
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.launch
+import models.Auth
 import models.UsersModel
 import screens.shared.InputTextField
 import screens.shared.MAINCOLOR
@@ -70,7 +71,8 @@ fun LoginScreen(
 
                                  if (password == "" || password == " ") return@Button
 
-                                 usersViewModel.login(user, password) { currentUser, cause ->
+                                 val auth = Auth(user, password)
+                                 usersViewModel.login(auth) { currentUser, cause ->
                                      if (currentUser != null && cause == "good") {
                                         usersModel.currentUser = currentUser.username
                                         onLoginClick()

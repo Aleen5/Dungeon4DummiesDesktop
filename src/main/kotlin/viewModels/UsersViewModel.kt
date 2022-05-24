@@ -5,6 +5,7 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
+import models.Auth
 import models.UsersModel
 import services.ApiServices
 
@@ -56,15 +57,12 @@ class UsersViewModel {
         }
     }
 
-    fun login(
-        username: String,
-        password: String,
-        onComplete: (usersModel: UsersModel?, cause: String) -> Unit
+    fun login(auth: Auth, onComplete: (usersModel: UsersModel?, cause: String) -> Unit
     ) {
         GlobalScope.launch {
             val apiServices = ApiServices.getInstance()
             try {
-                val user = apiServices.getLogin(username, password)
+                val user = apiServices.getLogin(auth)
                 if (user.isSuccessful) {
                     onComplete(user.body()!!, "good")
 

@@ -1087,6 +1087,8 @@ fun DeleteDialog(onAccept:() -> Unit, username: String, showDialog: Boolean, set
 
     if (showDialog) {
         AlertDialog(
+            modifier = Modifier.width(600.dp),
+            backgroundColor = MAINCOLOR,
             onDismissRequest = {
             },
             title = {
@@ -1101,7 +1103,7 @@ fun DeleteDialog(onAccept:() -> Unit, username: String, showDialog: Boolean, set
                     },
                     colors = ButtonDefaults.buttonColors(backgroundColor = Color.Red),
                 ) {
-                    Icon(painter = painterResource(resourcePath = "drawable/delete.png"), contentDescription = "YES, DELETE")
+                    Icon(painter = painterResource(resourcePath = "drawable/delete.png"), contentDescription = "YES, DELETE", modifier = Modifier.size(20.dp))
                     Text("Yes, DELETE")
                 }
             },

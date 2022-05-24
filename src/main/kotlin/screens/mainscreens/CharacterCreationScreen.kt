@@ -1,6 +1,7 @@
 package screens.mainscreens
 
 import StatsModel
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.material.*
@@ -248,7 +249,7 @@ fun CharacterCreationScreen(
         bottomBar = { BottomBar(onHomeClick = onHomeClick, onCharactersClick = onCharactersClick, onDiceThrowClick = onDiceThrowClick) },
     ){
         Column(
-            modifier = Modifier.fillMaxSize(),
+            modifier = Modifier.fillMaxSize().background(MAINCOLOR),
             verticalArrangement = Arrangement.Center,
             horizontalAlignment = Alignment.CenterHorizontally
         )
@@ -662,7 +663,7 @@ fun CharacterCreationScreen(
 
                             charactersViewModel.postCharacter(character)
 
-                            onCharactersClick
+                            onCharactersClick()
 
                         }) {
                         Column(horizontalAlignment = Alignment.CenterHorizontally) {
