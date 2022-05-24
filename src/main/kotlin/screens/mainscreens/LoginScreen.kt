@@ -11,6 +11,7 @@ import androidx.compose.ui.unit.dp
 import com.example.dungeon4dummiesmobile.screens.shared.*
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.launch
+import models.UsersModel
 import screens.shared.InputTextField
 import screens.shared.MAINCOLOR
 import screens.shared.PasswordTextField
@@ -23,6 +24,7 @@ fun LoginScreen(
     onRegisterClick: () -> Unit
 ) {
     val usersViewModel = UsersViewModel()
+    val usersModel = UsersModel
     val showDialogLoading = remember {
         mutableStateOf(false)
     }
@@ -33,6 +35,8 @@ fun LoginScreen(
     var password by remember {
         mutableStateOf("1234")
     }
+
+    usersModel.currentUser = null
     
     Scaffold(
         modifier = Modifier.background(Color.Black)
@@ -68,6 +72,7 @@ fun LoginScreen(
 
                                  usersViewModel.login(user, password) { currentUser, cause ->
                                      if (currentUser != null && cause == "good") {
+                                        usersModel.currentUser = currentUser.username
                                         onLoginClick()
                                      }
                                  }

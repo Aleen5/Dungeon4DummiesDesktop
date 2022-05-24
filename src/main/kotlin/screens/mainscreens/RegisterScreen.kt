@@ -114,7 +114,6 @@ fun RegisterScreen(
 
                                         }
                                     }
-                                    //navController.navigate(route = AppScreens.HomeScreen.route + "/${currentUser.username}")
                                 }
                             ) {
                                 Text(text = "Register")

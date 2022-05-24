@@ -21,5 +21,11 @@ sealed class Screen: Parcelable {
     object CharacterScreen: Screen()
 
     @Parcelize
+    object CharacterCreationScreen: Screen()
+
+    @Parcelize
+    object DiceThrowScreen: Screen()
+
+    @Parcelize
     object ProfileScreen: Screen()
 }

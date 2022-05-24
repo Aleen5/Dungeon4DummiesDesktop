@@ -39,5 +39,8 @@ data class UsersModel(
                 mutableListOf("1", "2")
             )
         )
+
+        var currentUser: String? = null
+        var selectedCharacterId: String? = null
     }
 }

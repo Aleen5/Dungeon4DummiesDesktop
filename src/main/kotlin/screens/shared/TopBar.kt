@@ -1,71 +1,123 @@
 package screens.shared
 
-/*
-
-import androidx.compose.foundation.Image
-import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.material.icons.filled.Menu
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
-import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.graphics.ColorFilter
-import androidx.compose.ui.input.key.Key.Companion.R
-import androidx.compose.ui.layout.ContentScale
-import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import androidx.navigation.NavController
-import androidx.navigation.compose.currentBackStackEntryAsState
-import com.example.dungeon4dummiesmobile.R
-import com.example.dungeon4dummiesmobile.navigation.DrawerNavigation
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.launch
+import org.intellij.lang.annotations.JdkConstants
 
 @Composable
-fun TopBar(barText: String) {
+fun TopBar(barText: String, onBackPressed:() -> Unit) {
     TopAppBar(
-        backgroundColor = colorResource(id = R.color.MAINCOLOR)
-
-    ) {
-        Text(
-            modifier = Modifier.padding(start = 15.dp),
-            text = barText,
-            color = Color.Black,
-            fontSize = 25.sp,
-            fontFamily = FontFamily.Cursive,
-            fontWeight = FontWeight.Bold,
-        )
-    }
-}
-
-@Composable
-fun TopBarExtended(barText: String, scope: CoroutineScope, scaffoldState: ScaffoldState) {
-    TopAppBar(
-        title = { Text( text = barText, fontSize = 25.sp, color = Color.Black, fontFamily = FontFamily.Cursive, fontWeight = FontWeight.Bold )},
-        navigationIcon = {
-            IconButton(onClick = {
-                scope.launch {
-                    scaffoldState.drawerState.open()
+        backgroundColor = MAINCOLOR,
+        title = {
+            Row(
+                verticalAlignment = Alignment.CenterVertically,
+            ) {
+                Column(
+                    horizontalAlignment = Alignment.Start
+                ) {
+                    IconButton(onClick = {
+                        onBackPressed()
+                    }) {
+                        Icon(Icons.Filled.ArrowBack, "",)
+                    }
                 }
-            }) {
-                Icon(Icons.Filled.Menu, "")
+
+                Column(
+                    horizontalAlignment = Alignment.CenterHorizontally
+                ) {
+                    Text(
+                        modifier = Modifier.padding(end = 45.dp).fillMaxWidth().align(Alignment.CenterHorizontally),
+                        text = barText,
+                        textAlign = TextAlign.Center,
+                        color = Color.Black,
+                        fontSize = 25.sp,
+                        fontFamily = FontFamily.SansSerif,
+                        fontWeight = FontWeight.Bold,
+                    )
+                }
             }
-        },
-        backgroundColor = colorResource(id = R.color.MAINCOLOR),
-        contentColor = Color.White
+        }
     )
 }
+
+
+@Composable
+fun TopBarExtended(barText: String, onBackPressed:() -> Unit, visibility: Boolean, visibilityIconVisible: Boolean, onVisibilityClick:(visible: Boolean) -> Unit) {
+    TopAppBar(
+        backgroundColor = MAINCOLOR,
+        title = {
+            Row(
+                verticalAlignment = Alignment.CenterVertically,
+            ) {
+                Column(
+                    horizontalAlignment = Alignment.Start
+                ) {
+                    IconButton(onClick = {
+                        onBackPressed()
+                    }) {
+                        Icon(Icons.Filled.ArrowBack, "",)
+                    }
+                }
+
+                Spacer(modifier = Modifier.width(25.dp))
+
+                Column(
+                    horizontalAlignment = Alignment.CenterHorizontally
+                ) {
+                    Text(
+                        modifier = Modifier.padding(end = 45.dp).wrapContentSize().align(Alignment.CenterHorizontally),
+                        text = barText,
+                        textAlign = TextAlign.Center,
+                        color = Color.Black,
+                        fontSize = 25.sp,
+                        fontFamily = FontFamily.SansSerif,
+                        fontWeight = FontWeight.Bold,
+                    )
+                }
+
+                Column(
+                    horizontalAlignment = Alignment.End,
+                    modifier = Modifier.fillMaxWidth().padding(end = 30.dp),
+
+                ) {
+                    if (visibility && visibilityIconVisible) Icon(
+                        painter = painterResource(resourcePath = "drawable/eye.png"),
+                        "",
+                        tint = Color.LightGray,
+                        modifier = Modifier.size(20.dp).clickable {
+                            onVisibilityClick(false)
+                        }
+                    ) else if (!visibility && visibilityIconVisible) Icon(
+                        painter = painterResource(resourcePath = "drawable/eyeoff.png"),
+                        "",
+                        tint = Color.LightGray,
+                        modifier = Modifier.size(20.dp).clickable {
+                            onVisibilityClick(true)
+                        }
+                    )
+                }
+            }
+        }
+    )
+}
+
+/*
 
 @Composable
 fun TopBarExtendedWithVisibility(barText: String, scope: CoroutineScope, scaffoldState: ScaffoldState, visibility: Boolean, visibilityIconVisible: Boolean, onVisibilityClick:(visible: Boolean) -> Unit) {
