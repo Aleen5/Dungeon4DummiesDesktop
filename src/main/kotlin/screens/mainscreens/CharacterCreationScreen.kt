@@ -286,7 +286,7 @@ fun CharacterCreationScreen(
 
                     item { InputTextField("Name", name, onValueChange = {name = it}) }
                     item { InputTextField("Surname", surname, onValueChange = {surname = it}) }
-                    item { InputTextField("Alias", alias, onValueChange = {alias = it}) }
+                    item { InputTextField("Alias ${race} ${racesListSelectedIndex}", alias, onValueChange = {alias = it}) }
                     item { ComposeMenu(
                         list = races,
                         onValueChange = { racesListSelectedIndex = it }
@@ -528,6 +528,10 @@ fun CharacterCreationScreen(
                             inventory = trimStringArray(stringInventory.replace("\n", "").removeSuffix(";").split(";").toMutableList())
                             attacksSorceries = trimStringArray(stringAttacksSorceries.replace("\n", "").removeSuffix(";").split(";").toMutableList())
                             featuresTraits = trimStringArray(stringFeaturesTraits.replace("\n", "").removeSuffix(";").split(";").toMutableList())
+
+                            race = races[racesListSelectedIndex]
+                            alignment = alignments[alignmentsListSelectedIndex]
+                            characterClass = classes[classesListSelectedIndex]
 
                             //// INICIO COMPROBACIONES ////
 

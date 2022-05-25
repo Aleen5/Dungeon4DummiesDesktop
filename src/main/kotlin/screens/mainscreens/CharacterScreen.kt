@@ -379,12 +379,12 @@ fun CharacterScreen(
     ) {
 
         Spacer(modifier = Modifier.padding(top = 40.dp))
+
         Card(
-            backgroundColor = Color.Black,
             modifier = Modifier.fillMaxWidth()
         ) {
             LazyColumn(
-                modifier = Modifier.fillMaxWidth().background(Color.Black),
+                modifier = Modifier.fillMaxWidth().background(MAINCOLOR),
                 contentPadding = PaddingValues(16.dp),
             ) {
 
@@ -410,20 +410,34 @@ fun CharacterScreen(
                         InputTextField(label = "Status", inValue = status, onValueChange = {status = it})
                     }
 
+                    item { Spacer(modifier = Modifier.height(15.dp)) }
+
                     item {
                         StatText("Race")
-                        ComposeMenu(races, onValueChange = { racesListSelectedIndex = it })
+                        ComposeMenu(races, onValueChange = {
+                            racesListSelectedIndex = it
+                            race = races[racesListSelectedIndex]
+                        })
                     }
+
+                    item { Spacer(modifier = Modifier.height(15.dp)) }
 
                     item {
                         StatText("Campaigns")
                         InputTextField(label = "Insert the campaigns this character is part of", inValue = campaigns, onValueChange = {campaigns = it})
                     }
 
+                    item { Spacer(modifier = Modifier.height(15.dp)) }
+
                     item {
                         StatText("Alignment")
-                        ComposeMenu(alignments, onValueChange = { alignmentsListSelectedIndex = it })
+                        ComposeMenu(alignments, onValueChange = {
+                            alignmentsListSelectedIndex = it
+                            alignment = alignments[alignmentsListSelectedIndex]
+                        })
                     }
+
+                    item { Spacer(modifier = Modifier.height(15.dp)) }
 
                     item {
                         StatText("HP")
@@ -449,10 +463,17 @@ fun CharacterScreen(
                         NumericInput(label = "Exp", number = exp, onValueChange = {exp = it})
                     }
 
+                    item { Spacer(modifier = Modifier.height(15.dp)) }
+
                     item {
                         StatText("Class")
-                        ComposeMenu(classes, onValueChange = { classesListSelectedIndex = it })
+                        ComposeMenu(classes, onValueChange = {
+                            classesListSelectedIndex = it
+                            characterClass = classes[classesListSelectedIndex]
+                        })
                     }
+
+                    item { Spacer(modifier = Modifier.height(15.dp)) }
 
                     item {
                         StatText("Archetype")
@@ -715,7 +736,6 @@ fun CharacterScreen(
                     } else if (editing && visibility) {
 
                         // Save Changes Button
-
                         Button(
                             onClick = {
 
@@ -801,6 +821,7 @@ fun CharacterScreen(
 
                                 editing = false
                                 visibilityIconVisible = true
+
                             },
                             colors = ButtonDefaults.buttonColors(backgroundColor = Color.Green)) {
                             Row(modifier = Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.Center) {
