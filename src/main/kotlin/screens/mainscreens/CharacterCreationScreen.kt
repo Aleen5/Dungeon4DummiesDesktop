@@ -286,7 +286,7 @@ fun CharacterCreationScreen(
 
                     item { InputTextField("Name", name, onValueChange = {name = it}) }
                     item { InputTextField("Surname", surname, onValueChange = {surname = it}) }
-                    item { InputTextField("Alias ${race} ${racesListSelectedIndex}", alias, onValueChange = {alias = it}) }
+                    item { InputTextField("Alias", alias, onValueChange = {alias = it}) }
                     item { ComposeMenu(
                         list = races,
                         onValueChange = { racesListSelectedIndex = it }
